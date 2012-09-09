@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Пример анимации иконки автомобиля по маршруту</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="http://yandex.st/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+    <link href="car.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="http://api-maps.yandex.ru/2.0.15/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+
+    <script type="text/javascript">
+var map, car;
+
+// Как только будет загружен API и готов DOM, выполняем инициализацию
+ymaps.ready(function () {
+    "use strict";
+
+    map = new ymaps.Map("map", {
+        center: [55.75, 37.62],
+        zoom: 10
+    });
+
+    $.getScript('car.js', function () {
+        car = new Car({
+            iconLayout: ymaps.templateLayoutFactory.createClass(
+                '<div class="b-car b-car_blue b-car-direction-$[properties.direction]"></div>'
+            )
+        });
+
+        // Прокладывание маршрута от станции метро "Смоленская"
+        // до станции Третьяковская (маршрут должен проходить через метро "Кропоткинская").
+        // Точки маршрута можно задавать 3 способами:  как строка, как объект или как массив геокоординат.
+        ymaps.route([
+            'Москва, метро Смоленская',
+            {
+                type: 'viaPoint', // метро Кропоткинская - транзитная точка (проезжать через эту точку, но не останавливаться в ней)
+                point: 'Москва, метро Кропоткинская'
+            }, {
+                type: 'viaPoint', // через третьяковскую галерею
+                point: 'Россия, Москва, Лаврушинский переулок, 10'
+            },
+            [55.740532, 37.625693] // и до метро "Третьяковская"
+        ], {
+            // Опции маршрутизатора
+            mapStateAutoApply: true // автоматически позиционировать карту
+        }).then(function (route) {
+            // Задание контента меток в начальной и конечной точках
+            var points = route.getWayPoints();
+
+            points.get(0).properties.set("iconContent", "А");
+            points.get(1).properties.set("iconContent", "Б");
+
+            // Добавление маршрута на карту
+            map.geoObjects.add(route);
+            // И "машинку" туда же
+            map.geoObjects.add(car);
+
+            // Отправляем машинку по полученному маршруту простым способом
+            // car.moveTo(route.getPaths().get(0).getSegments());
+            // или чуть усложненным: с указанием скорости,
+            car.moveTo(route.getPaths().get(0).getSegments(), {
+                speed: 10,
+                directions: 8
+            }, function (geoObject, coords, direction) { // тик движения
+                // перемещаем машинку
+                geoObject.geometry.setCoordinates(coords);
+                // ставим машинке правильное направление - в данном случае меняем ей текст
+                geoObject.properties.set('direction', direction.t);
+
+            }, function (geoObject) { // приехали
+                geoObject.properties.set('balloonContent', "Приехали!");
+                geoObject.balloon.open();
+            });
+
+        }, function (error) {
+            console.error("Возникла ошибка: " + error.message);
+        });
+    });
+});
+</script>
+<body>
+    <div class="hero-unit">
+        <div class="container">
+            <p>Пример анимации иконки автомобиля по маршруту</p>
+            <div id="map" style="width: 800px; height: 400px"></div>
+        </div>
+    </div>
+</body>
+
+</html>
