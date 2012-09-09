@@ -5,6 +5,8 @@ ymaps related things
 
 Examples: http://zxqfox.github.com/ymaps/examples/
 
+Published under MIT License
+
 Car
 ---
 
@@ -71,5 +73,3 @@ $.getScript('car.js', function () {
   });
 });
 ```
-
-Published under MIT License
