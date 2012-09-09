@@ -10,11 +10,11 @@
     <script src="http://api-maps.yandex.ru/2.0.15/?load=package.full&lang=ru-RU" type="text/javascript"></script>
 
     <script type="text/javascript">
-var map, car;
 
 // Как только будет загружен API и готов DOM, выполняем инициализацию
 ymaps.ready(function () {
     "use strict";
+    var map, car;
 
     map = new ymaps.Map("map", {
         center: [55.75, 37.62],
