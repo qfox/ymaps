@@ -19,7 +19,7 @@ ymaps.ready(function () {
         zoom: 10
     });
 
-    $.getScript('car.js', function () {
+    $.getScript('http://raw.github.com/zxqfox/ymaps/master/car/car.js', function () {
         car = new Car();
 
         // Прокладывание маршрута от станции метро "Смоленская"
@@ -38,7 +38,7 @@ ymaps.ready(function () {
             map.geoObjects.add(car);
 
             // Отправляем машинку по полученному маршруту простым способом
-            car.moveTo(route.getWayPoints().getPaths().get(0).getSegments());
+            car.moveTo(route.getPaths().get(0).getSegments());
 
         }, function (error) {
             console.error("Возникла ошибка: " + error.message);

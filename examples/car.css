@@ -1,5 +1,5 @@
 .b-car { width: 54px; height: 54px; margin-left:-27px; margin-top:-27px; }
-.b-car.b-car_blue { background: url(http://ymlib.narod.ru/1.1/src/i/cars-blue.png) no-repeat 0 0; }
+.b-car.b-car_blue { background: url(i/cars-blue.png) no-repeat 0 0; }
 .b-car.b-car-direction-e {background-position:-324px 0}
 .b-car.b-car-direction-ne {background-position:-378px 0}
 .b-car.b-car-direction-n {background-position:0 0}
