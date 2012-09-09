@@ -3,13 +3,14 @@ ymaps
 
 ymaps related things
 
+Examples: http://zxqfox.github.com/ymaps/examples/
 
 Car
 ---
 
 Simple javascript object for animating some route on yandex.maps (http://api.yandex.ru/maps/doc/jsapi/2.x/ref/)
 
-Demo: http://ymapsapi.narod.ru/examples/car/
+Examples: http://zxqfox.github.com/ymaps/examples/car/
 
 ### Simple example usage
 ```js
@@ -70,3 +71,5 @@ $.getScript('car.js', function () {
   });
 });
 ```
+
+Published under MIT License
