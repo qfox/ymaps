@@ -10,10 +10,22 @@ var Car = (function () {
 
     // делаем заготовку для кол-ва направлений. 4, 8 или 16 (+, x, *)
     var directionsVariants = {
+        // стрелочки для разных направлений (нет стрелочек для 16)
+        arrows: {
+            w:  '←',
+            sw: '↙',
+            s:  '↓',
+            se: '↘',
+            e:  '→',
+            ne: '↗',
+            n:  '↑',
+            nw: '↖',
+        },
+        // возможные направления для разной степени точности
         classes: {
             16: ['w', 'sww', 'sw', 'ssw', 's', 'sse', 'se', 'see', 'e', 'nee', 'ne', 'nne', 'n', 'nnw', 'nw', 'nww'],
-            8: ['← w', '↙ sw', '↓ s', '↘ se', '→ e', '↗ ne', '↑ n', '↖ nw'],
-            4: ['← w', '↓ s', '→ e', '↑ n']
+            8: ['w', 'sw', 's', 'se', 'e', 'ne', 'n', 'nw'],
+            4: ['w', 's', 'e', 'n']
         },
         n: function (x,y,n) {
             n = n || 8;
@@ -35,8 +47,8 @@ var Car = (function () {
     var defaultMovingCallback = function (geoObject, coords, direction) { // действие по умолчанию
             // перемещаем машинку
             geoObject.geometry.setCoordinates(coords);
-            // ставим машинке правильное направление - в данном случае меняем ей текст
-            geoObject.properties.set('iconContent', direction.t);
+            // ставим машинке правильное направление - в данном случае меняем ей текст (если получится — на стрелочку)
+            geoObject.properties.set('iconContent', directionsVariants.arrows[direction.t] || direction.t);
         },
         defaultCompleteCallback = function (geoObject) { // действие по умолчанию
             // приехали
