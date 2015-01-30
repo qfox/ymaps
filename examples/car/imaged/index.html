@@ -20,7 +20,7 @@ ymaps.ready(function () {
         zoom: 10
     });
 
-    $.getScript('https://raw.github.com/zxqfox/ymaps/master/car/car.js', function () {
+    $.getScript('../car.js', function () {
         car = new Car({
             iconLayout: ymaps.templateLayoutFactory.createClass(
                 '<div class="b-car b-car_blue b-car-direction-$[properties.direction]"></div>'
@@ -77,7 +77,8 @@ ymaps.ready(function () {
         });
     });
 });
-</script>
+    </script>
+</head>
 <body>
     <div class="hero-unit">
         <div class="container">
@@ -86,5 +87,4 @@ ymaps.ready(function () {
         </div>
     </div>
 </body>
-
 </html>

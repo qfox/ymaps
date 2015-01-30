@@ -19,7 +19,7 @@ ymaps.ready(function () {
         zoom: 10
     });
 
-    $.getScript('http://raw.github.com/zxqfox/ymaps/master/car/car.js', function () {
+    $.getScript('../car.js', function () {
         car = new Car();
 
         // Прокладывание маршрута от станции метро "Смоленская"
@@ -45,7 +45,8 @@ ymaps.ready(function () {
         });
     });
 });
-</script>
+    </script>
+</head>
 <body>
     <div class="hero-unit">
         <div class="container">
@@ -54,5 +55,4 @@ ymaps.ready(function () {
         </div>
     </div>
 </body>
-
 </html>
