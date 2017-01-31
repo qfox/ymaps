@@ -3,7 +3,7 @@ ymaps
 
 ymaps related things
 
-Examples: http://zxqfox.github.com/ymaps/examples/
+Examples: http://zxqfox.github.io/ymaps/examples/
 
 Published under MIT License
 
@@ -12,7 +12,7 @@ Car
 
 Simple javascript object for animating some route on yandex.maps (http://api.yandex.ru/maps/doc/jsapi/2.x/ref/)
 
-Examples: http://zxqfox.github.com/ymaps/examples/car/
+Examples: http://zxqfox.github.io/ymaps/examples/car/
 
 ### Simple example usage
 ```js
